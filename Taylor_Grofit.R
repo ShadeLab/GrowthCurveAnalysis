@@ -10,10 +10,16 @@ time=row.names(data)
 time=as.numeric(sub("s", "",time))
 row.names(data)=NULL
 
+#define negative controls and subtract from dataset
+neg=data[91:96]
+neg=data.frame(rep(neg, 16))
+data= data - neg
+
 #make a time matrix based on number of observations and variables
 n=nrow(data)
 m=ncol(data)
 time=matrix(rep(time, m), c(n, m))
+time=t(time)
 
 #transverse the data
 data=t(data)
